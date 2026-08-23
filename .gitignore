@@ -25,3 +25,6 @@ dist-ssr
 
 # Prettier
 .prettierrc
+
+# Vercel
+.vercel
