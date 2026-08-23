@@ -1,75 +1,68 @@
-# React + TypeScript + Vite
+# React 19 Modern Data Resolution: The `use()` Hook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates the core data resolution patterns introduced in **React 19**, specifically focusing on the new native **`use()`** hook, **React Suspense**, and **Error Boundaries**.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The application showcases a clean architectural separation between promise creation and promise resolution:
 
-## React Compiler
+1. **Deferred Promise Generation (`App.tsx` & `simulateServerRequest.ts`)**
+   - Implements a generic TypeScript function (`<T>`) that returns a `Promise` with a configurable `setTimeout` delay to mimic actual network latency.
+   - Instantiates the stable promise reference strictly at the module/parent scope to prevent unwanted re-triggering loops during UI updates.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. **Prop-Driven Promise Resolution (`MessageComponent.tsx`)**
+   - Accepts the pending promise directly via component props.
+   - Employs the native React 19 **`use()`** hook to gracefully unwrap the async payload on the fly without relying on legacy `useEffect` and `useState` boilerplate.
 
-## Expanding the ESLint configuration
+3. **Declarative Lifecycle Management**
+   - Integrates with **React Suspense** to seamlessly capture the pending promise throw and render a fallback loading indicator.
+   - Wraps the stack inside an **Error Boundary** container to isolate and intercept structural lookup rejections safely without crashing the main application runtime.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Framework:** React 19
+- **Build Tool:** Vite
+- **Language:** TypeScript
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 💻 Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Follow these steps to run this React 19 demo locally on your machine.
 
+### Prerequisites
+
+Ensure you have [Node.js](https://nodejs.org) installed (version 18 or higher is recommended).
+
+### Installation
+
+1. Clone or download this repository.
+2. Open your terminal and change into the project root directory:
+   ```bash
+   cd path/to/your/project
+   ```
+3. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running the Development Server
+
+Launch Vite's local development environment:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Once started, open your web browser and navigate to the local URL provided in your terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Building for Production
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To create an optimized production build of the project:
 
+```bash
+npm run build
 ```
+
+## 🌐 Live Demo
+
+You can view the live deployment of this project at the following link:
+👉 **[Insert Your Live Demo URL Here]**

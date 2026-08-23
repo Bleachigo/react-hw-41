@@ -9,7 +9,7 @@ export const MessageComponent = ({ messagePromise }: MessageComponentProps) => {
 
   return (
     <div className="message-box">
-      <h3>Message Box</h3>
+      <h2>Message Box</h2>
       <p>{data}</p>
     </div>
   );
