@@ -3,7 +3,10 @@ import { MessageComponent } from './components/MessageComponent';
 import { simulateServerRequest } from './utils/simulateServerRequest';
 import { ErrorBoundary } from 'react-error-boundary';
 
-const myMessagePromise = simulateServerRequest('Fake server request', 2000);
+const myMessagePromise = simulateServerRequest(
+  'Fake server request message here!',
+  3000,
+);
 
 export function App() {
   return (
