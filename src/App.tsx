@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { MessageComponent } from './components/MessageComponent';
-import { simulateServerRequest } from './utils/simulateServerRequest';
+import { simulateServerRequest } from './helpers/simulateServerRequest';
 import { ErrorBoundary } from 'react-error-boundary';
 
 const myMessagePromise = simulateServerRequest(
